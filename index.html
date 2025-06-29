@@ -3,9 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>Redirecionando...</title>
-  <meta http-equiv="refresh" content="1;url=https://play.google.com/store/apps/details?id=com.giga.gigaflix">
+  <script>
+    setTimeout(function () {
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      var playStoreUrl = "https://play.google.com/store/apps/details?id=com.giga.gigaflix";
+      var intentUrl = "intent://details?id=com.giga.gigaflix#Intent;scheme=market;package=com.android.vending;end";
+
+      if (/android/i.test(userAgent)) {
+        // Tenta abrir direto no app da Play Store
+        window.location.href = intentUrl;
+      } else {
+        // Para outros sistemas, abre o link da web
+        window.location.href = playStoreUrl;
+      }
+    }, 1000); // 1000 milissegundos = 1 segundo
+  </script>
 </head>
 <body>
-  <p>Redirecionando para a Play Store...</p>
+  <p style="text-align:center;margin-top:50px;">Redirecionando para a Play Store...</p>
 </body>
 </html>
+
