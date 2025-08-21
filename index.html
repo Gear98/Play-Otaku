@@ -1,116 +1,218 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Assista Animes Grátis</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AniFlix – Assista Animes em FHD (Sem Anúncios)</title>
+  <meta name="description" content="AniFlix: milhares de animes em FHD, sem anúncios, com download e Chromecast. Baixe agora no Google Play." />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="preconnect" href="https://play.google.com" />
+  <link rel="dns-prefetch" href="https://play.google.com" />
+  <link rel="preconnect" href="https://bioinsta.link" />
+  <link rel="dns-prefetch" href="https://bioinsta.link" />
+  <meta property="og:title" content="AniFlix – Animes em FHD, sem anúncios" />
+  <meta property="og:description" content="Milhares de animes. FHD. Download. Chromecast. Sem anúncios." />
+  <meta property="og:type" content="website" />
   <style>
+    :root {
+      --bg: #0b1220;
+      --card: #0f172a;
+      --text: #e6edf3;
+      --muted: #a8b3c7;
+      --accent: #22c55e;
+      --cta: #10b981;
+      --cta-2: #0ea5e9;
+      --ring: rgba(34, 197, 94, 0.45);
+      --shadow: 0 10px 30px rgba(0,0,0,.5);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: url('https://i.pinimg.com/originals/70/78/23/70782337a7d87dadfb8b5040f2118a41.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      position: relative;
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell;
+      color: var(--text); background: radial-gradient(1200px 600px at 80% -10%, #1f2a44 0%, #0b1220 45%),
+                              radial-gradient(1000px 500px at -10% 80%, #0c2535 0%, #0b1220 55%), #0b1220;
+      background-attachment: fixed;
+      display: grid; place-items: center; padding: 24px; overflow-x: hidden;
+    }
+    .shell { width: 100%; max-width: 980px; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; padding: 10px 14px; background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px; box-shadow: var(--shadow);
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .badge { font-weight: 700; letter-spacing: 0.5px; }
+    .brand .logo {
+      width: 36px; height: 36px; border-radius: 9px;
+      background: linear-gradient(135deg, #22c55e, #0ea5e9);
+      display: grid; place-items: center; font-weight: 800; color: #061017;
+    }
+    .top-cta { display: inline-flex; align-items: center; gap: 10px; }
+    .btn, .btn-ghost {
+      --p: 14px 18px; --fs: 15px; --br: 12px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      border: 0; border-radius: var(--br); padding: var(--p); font-size: var(--fs);
+      cursor: pointer; text-decoration: none; user-select: none;
+      transition: transform .12s ease, box-shadow .12s ease, background .2s ease, opacity .2s;
+    }
+    .btn { background: linear-gradient(90deg, var(--cta), var(--cta-2)); color: #061017; font-weight: 800; }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(16,185,129,.35); }
+    .btn:active { transform: translateY(0); box-shadow: 0 4px 12px rgba(16,185,129,.25); }
+
+    .btn-ghost { background: rgba(255,255,255,0.06); color: var(--text); border: 1px solid rgba(255,255,255,0.12); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.09); }
+
+    .hero {
+      margin-top: 18px; padding: 28px; border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08); box-shadow: var(--shadow);
+      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; align-items: center;
+    }
+    .hero h1 { font-size: clamp(28px, 5vw, 44px); line-height: 1.1; margin: 0 0 10px; }
+    .hero p.lead { color: var(--muted); font-size: clamp(15px, 2.5vw, 18px); margin: 0 0 20px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 22px; }
+    .chip { font-weight: 600; font-size: 13px; padding: 8px 12px; border-radius: 999px; color: #0b1220;
+            background: linear-gradient(90deg, #a7f3d0, #93c5fd); border: 1px solid rgba(0,0,0,.06); }
+    .cta-group { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .phone { position: relative; width: min(100%, 380px); justify-self: center; }
+    .device { width: 100%; aspect-ratio: 9/19.5; border-radius: 28px; background: #0e1322; border: 10px solid #11182b; position: relative; overflow: hidden; }
+    .device:before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0)); pointer-events: none; }
+    .screen { position: absolute; inset: 0; background: radial-gradient(140% 80% at 50% 10%, #1f2937, #0b0f1a); display: grid; place-items: center; color: #cbd5e1; font-weight: 600; }
+    /* ADIÇÃO: mídia preenche a tela do mock sem distorcer */
+    .screen .app-media, .screen video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .trust { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-top: 16px; }
+    .trust .k { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 10px; text-align: center; font-size: 13px; color: var(--muted); }
+
+    .foot-cta { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 50; display: grid; place-items: center; }
+    .foot-cta .bar { width: min(960px, 100%); display: flex; gap: 10px; align-items: center; justify-content: space-between; background: rgba(15,23,42,.82); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 10px; box-shadow: var(--shadow); }
+    .foot-cta .txt { font-size: 14px; color: var(--muted); }
+
+    .tap-anywhere { display: none; margin-top: 10px; color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .phone { order: -1; }
+      .tap-anywhere { display: block; }
     }
 
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.75);
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0; left: 0;
-      z-index: 0;
+    /* Big tap zones on mobile to aumentar CTR */
+    .tapzone {
+      position: absolute; inset: 0; border-radius: var(--radius); cursor: pointer;
+      background: linear-gradient(180deg, rgba(34,197,94,.06), rgba(14,165,233,.06));
+      opacity: 0; transition: opacity .2s; outline: none; border: 0;
     }
+    .hero:focus-within .tapzone, .tapzone:focus, .tapzone:hover { opacity: .06; box-shadow: 0 0 0 4px var(--ring) inset; }
 
-    .container {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      max-width: 1000px;
-      width: 90%;
-      padding: 30px;
-      border-radius: 20px;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-
-    .text-section {
-      flex: 1;
-      max-width: 450px;
-    }
-
-    .text-section h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-
-    .text-section p {
-      font-size: 1.1rem;
-      margin-bottom: 30px;
-      color: #ccc;
-    }
-
-    .btn {
-      background-color: #ff0055;
-      color: #fff;
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 10px;
-      text-decoration: none;
-      transition: background 0.3s;
-      display: inline-block;
-    }
-
-    .btn:hover {
-      background-color: #e6004e;
-    }
-
-    .image-section img {
-      max-width: 300px;
-      height: auto;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
-
-      .text-section h1 {
-        font-size: 2rem;
-      }
-
-      .btn {
-        font-size: 1rem;
-        padding: 12px 25px;
-      }
-
-      .image-section img {
-        max-width: 200px;
-      }
-    }
+    /* Accessibility */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+    
+    
   </style>
 </head>
 <body>
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="text-section">
-      <h1>ASSISTA ANIMES EM FHD GRÁTIS</h1>
-      <p>Clique e baixe o app na Play Store.</p>
-      <a class="btn" href="https://bioinsta.link/psplayotaku" target="_blank">BAIXAR 100% GRÁTIS 🎬</a>
-    </div>
-    <div class="image-section">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Cheeky-Meliodas.png" alt="Personagem estilo anime">
+  <div class="shell" role="main">
+    <header class="topbar" aria-label="Barra superior">
+      <div class="brand" aria-label="AniFlix">
+        <div>
+          <div class="badge">AniFlix</div>
+        </div>
+      </div>
+      <div class="top-cta">
+        <a class="btn" id="btnTop" href="#" rel="noopener">Baixar no Google Play</a>
+        <a class="btn-ghost" id="btnDemo" href="#features" rel="noopener">Ver recursos</a>
+      </div>
+    </header>
+
+    <section class="hero" aria-label="Destaque do app">
+      <button class="tapzone" id="tapZone" aria-label="Abrir Google Play (toque em qualquer área)"></button>
+      <div>
+        <h1>AniFlix — Bonito, Rápido e Completo.</h1>
+        <p class="lead">Milhares de animes em <strong>FHD</strong>, <strong>sem anúncios</strong>, com <strong>download</strong> e <strong>Chromecast</strong>. Experiência caprichada do ícone até o player.</p>
+        <div class="chips" id="features">
+          <span class="chip">FHD 1080p</span>
+          <span class="chip">Sem anúncios</span>
+          <span class="chip">Download Episódios</span>
+          <span class="chip">Chromecast pra TV</span>
+          <span class="chip">Catálogo Gigante</span>
+        </div>
+        <div class="cta-group">
+          <a class="btn" id="btnHero" href="#" rel="noopener" aria-label="Baixar AniFlix no Google Play">Baixar grátis</a>
+          <a class="btn-ghost" id="btnSecondary" href="#" rel="noopener" aria-label="Abrir na Play Store">Abrir na Play Store</a>
+        </div>
+        <div class="tap-anywhere">Dica: no celular, toque em qualquer área para abrir a Play Store.</div>
+      </div>
+
+      <div class="phone" aria-hidden="true">
+        <div class="device">
+          <div class="screen" aria-label="Prévia do app">
+            <span class="sr-only">Prévia do app</span>
+            <video class="app-media" autoplay muted loop playsinline poster="assets/aniflix-poster.jpg">
+              <source src="https://pub-0fead4ea941046298ae067d6f5fdf034.r2.dev/20250821_115102_lv_0_20250821082704.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Sticky bottom CTA -->
+  <div class="foot-cta" aria-hidden="false">
+    <div class="bar">
+      <div class="txt">Pronto pra assistir agora?</div>
+      <a class="btn" id="btnSticky" href="#" rel="noopener" aria-label="Baixar AniFlix no Google Play (barra fixa)">Baixar no Google Play</a>
     </div>
   </div>
+
+  <script>
+    // ====== CONFIGURAÇÃO DE LINKS ======
+    const PLAY_STORE_DIRECT = 'https://play.google.com/store/apps/details?id=com.geartec.aniflix&utm_source=landing&utm_medium=cta&utm_campaign=aniflix';
+    const FALLBACK_LINK = 'https://bioinsta.link/aniflix';
+
+    // Usa Play Store direto no Android; nos demais mantém o fallback se preferir.
+    function isAndroid(){ return /Android/i.test(navigator.userAgent); }
+    function getTargetUrl(){ return isAndroid() ? PLAY_STORE_DIRECT : PLAY_STORE_DIRECT; /* ou FALLBACK_LINK */ }
+
+    function goToStore(evt){
+      const url = getTargetUrl();
+      // Anexa quaisquer UTM já existentes na URL atual para rastrear campanhas
+      try {
+        const currentParams = new URLSearchParams(window.location.search);
+        if ([...currentParams.keys()].length) {
+          const u = new URL(url);
+          currentParams.forEach((v,k)=>u.searchParams.set(k,v));
+          window.location.href = u.toString();
+          return;
+        }
+      } catch(_){}
+      window.location.href = url;
+    }
+
+    // Botões e zonas de toque
+    const ids = ['btnTop','btnDemo','btnHero','btnSecondary','btnSticky','tapZone'];
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if(!el) return;
+      if(id==='btnDemo') return; // "Ver recursos" apenas rola a página
+      el.addEventListener('click', (e)=>{ e.preventDefault(); goToStore(e); });
+    });
+
+    // Acessibilidade: Enter/Space na hero abre a loja
+    document.addEventListener('keydown', (e)=>{
+      if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('a,button,input,select,textarea')) {
+        e.preventDefault();
+        goToStore();
+      }
+    });
+
+    // Prefetch leve do destino para sensação de resposta
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = PLAY_STORE_DIRECT;
+    document.head.appendChild(link);
+  </script>
 </body>
 </html>
