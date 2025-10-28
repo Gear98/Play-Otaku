@@ -1,100 +1,110 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AniFlix — Baixe na Play Store</title>
-  <meta name="description" content="Baixe o AniFlix e comece a assistir. Indique e Ganhe dentro do app." />
-  <link rel="icon" href="assets/favicon.png" />
-  <style>
-    :root{
-      --bg:#0b0b0f;         /* fundo escuro */
-      --txt:#f4f6ff;        /* texto principal */
-      --muted:#a9aebe;      /* texto secundário */
-      --brand:#dc2626;      /* vermelho principal */
-      --brand2:#b91c1c;     /* vermelho profundo */
-      --accent:#22c55e;     /* selo de seguro */
-      --radius:20px;
-      --shadow:0 22px 60px rgba(0,0,0,.45);
-      --grad:linear-gradient(135deg,var(--brand),var(--brand2));
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;background:var(--bg);color:var(--txt);font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
-      background-image:
-        radial-gradient(1000px 500px at 10% -10%, rgba(220,38,38,.25), transparent 60%),
-        radial-gradient(900px 420px at 100% 0%, rgba(185,28,28,.18), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)),
-        repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 2px);
-      background-color:var(--bg);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Drama - Histórias Curtas. Emoções Gigantes.</title>
+    <meta name="description" content="Play Drama: seu app de dramas curtos pra maratonar em minutos. Histórias curtas. Emoções gigantes. Baixe agora na Play Store.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #FF416C; /* Rosa Vibrante */
+            --color-secondary: #FF4B2B; /* Laranja Energético */
+            --color-dark: #121212;
+            --color-light: #F9F9F9;
+            --font-family: 'Poppins', sans-serif;
+        }
 
-    .hero{min-height:100vh;display:grid;place-items:center;padding:28px;position:relative;overflow:hidden}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    .glow{position:absolute;inset:auto auto -120px -120px;width:520px;height:520px;border-radius:50%;filter:blur(80px);opacity:.35;background:var(--brand)}
-    .glow2{position:absolute;inset:-140px -140px auto auto;width:480px;height:480px;border-radius:50%;filter:blur(90px);opacity:.28;background:var(--brand2)}
+        body {
+            font-family: var(--font-family);
+            /* Fundo escuro com gradiente sutil */
+            background: linear-gradient(135deg, var(--color-dark) 0%, #222 100%);
+            color: var(--color-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Garante que o conteúdo ocupe a tela inteira */
+        }
 
-    .char{position:absolute;inset:auto -24px 0 auto;max-width:min(50vw,620px);opacity:.93;pointer-events:none;filter: drop-shadow(0 24px 50px rgba(0,0,0,.55))}
-    @media (max-width:980px){.char{inset:auto -20px -12px auto;max-width:64vw;opacity:.78}}
+        .hero-container {
+            max-width: 600px; /* Limita a largura para foco */
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
 
-    .card{
-      width:100%;max-width:720px;padding:26px;border-radius:var(--radius);
-      background:rgba(255,255,255,.06);backdrop-filter: blur(12px);
-      border:1px solid rgba(255,255,255,.10);box-shadow:var(--shadow);position:relative;z-index:2
-    }
+        /* --- Títulos --- */
+        .hero-container h1 {
+            font-size: clamp(3rem, 10vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            line-height: 1;
+            /* Gradiente de cor vibrante */
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-    .logo{width:56px;height:56px;border-radius:14px;background:var(--grad);box-shadow:0 12px 30px rgba(220,38,38,.45)}
-    h1{margin:0;font-size:clamp(28px,5.2vw,44px);line-height:1.06}
-    p{margin:10px 0 18px;color:var(--muted);font-size:clamp(14px,2.6vw,18px)}
+        .hero-container p {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-weight: 600;
+            margin-bottom: 50px;
+            color: rgba(255, 255, 255, 0.9);
+        }
 
-    .btn{
-      display:inline-flex;align-items:center;gap:10px;padding:15px 20px;border-radius:16px;
-      background:var(--grad);color:#fef2f2;font-weight:900;border:0;cursor:pointer;
-      text-decoration:none;box-shadow:0 12px 28px rgba(220,38,38,.45);transition:transform .12s ease, box-shadow .12s ease
-    }
-    .btn:hover{transform:translateY(-1px);box-shadow:0 16px 34px rgba(220,38,38,.55)}
-    .btn:active{transform:translateY(0)}
+        /* --- Download Button --- */
+        .btn-download {
+            display: inline-block;
+            padding: 18px 50px;
+            font-size: clamp(1.1rem, 4vw, 1.4rem);
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--color-light);
+            /* Gradiente do botão */
+            background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            /* Sombra chamativa para conversão */
+            box-shadow: 0 10px 30px rgba(255, 65, 108, 0.4);
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-    .tag{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:12px;border:1px dashed rgba(255,255,255,.22);color:#fee2e2;background:linear-gradient(180deg, rgba(220,38,38,.16), rgba(185,28,28,.10))}
+        .btn-download:hover {
+            transform: translateY(-5px); /* Efeito 3D sutil */
+            box-shadow: 0 18px 40px rgba(255, 65, 108, 0.7);
+        }
 
-    .sub{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:13px;color:#ffe9e7}
-    .dot{width:8px;height:8px;border-radius:999px;background:var(--accent);box-shadow:0 0 0 0 rgba(34,197,94,.6);animation:pulse 2s infinite}
-    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.6)}70%{box-shadow:0 0 0 18px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
-
-    footer{position:absolute;left:0;right:0;bottom:16px;text-align:center;color:#c9cbd6;font-size:12px;opacity:.7}
-  </style>
+        /* Adicionando um pequeno ícone da Play Store (usando um emoji como fallback simples) */
+        .btn-download::before {
+            content: '▶️';
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
-  <main class="hero">
-    <div class="glow" aria-hidden="true"></div>
-    <div class="glow2" aria-hidden="true"></div>
 
-    <section class="card">
-      <div class="head">
-        <div class="tag">Indique e Ganhe PIX</div>
-      </div>
-      <h1>AniFlix — Animes</h1>
-      <p>Assista aos seus animes favoritos. Recomende para seus amigos e ganhe R$ por indicação.</p>
+    <!-- Conteúdo Minimalista Focado em Conversão -->
+    <div class="hero-container">
+        <h1>Play Drama</h1>
+        <p>Histórias curtas. Emoções gigantes. Baixe agora e comece a maratonar em minutos.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.geartec.playdrama" class="btn-download" target="_blank">
+            Download na Play Store
+        </a>
+    </div>
 
-      <a id="btnPlay" class="btn" href="#" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.2c-.4.3-.6.8-.6 1.3v17c0 .5.2 1 .6 1.3l9.6-9.8L3.6 2.2zm10.7 7.6l-2 2 2 2 5.7 3.4c.6-.3 1-.9 1-1.6V7.8c0-.7-.4-1.3-1-1.6l-5.7 3.6zM5 21l8.5-5.1-1.9-1.9L5 21zm8.5-12.9L5 3l6.6 6.6 1.9-1.5z"/></svg>
-        Baixar na Play Store
-      </a>
-      <div class="sub"><span class="dot"></span> Download seguro • Publicado na loja</div>
-    </section>
-
-    <footer>© <span id="year"></span> AniFlix</footer>
-  </main>
-
-  <script>
-    const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=com.geartec.aniflix";
-    const CHARACTER_IMG_URL = "";
-
-    document.getElementById('btnPlay').href = PLAY_STORE_URL;
-    document.getElementById('char').src = CHARACTER_IMG_URL;
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
